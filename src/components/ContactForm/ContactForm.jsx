@@ -1,7 +1,9 @@
-import { useState } from 'react';
-import { nanoid } from 'nanoid';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
 
-const ContactForm = ({ onAdd, onCheckUnique }) => {
+const ContactForm = ({ onCheckUnique }) => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -15,9 +17,11 @@ const ContactForm = ({ onAdd, onCheckUnique }) => {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-    const inValidateForm = validateForm();
-    if (!inValidateForm) return;
-    onAdd({ id: nanoid(), name, number });
+    const isValidForm = validateForm();
+    if (!isValidForm) return;
+    dispatch(addContact({ name, number }));
+    setName('');
+    setNumber('');
   };
 
   const validateForm = () => {
@@ -48,7 +52,6 @@ const ContactForm = ({ onAdd, onCheckUnique }) => {
         onChange={handleChangeFormNumber}
         required
       />
-
       <button type="submit">Add contact</button>
     </form>
   );

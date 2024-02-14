@@ -1,31 +1,23 @@
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
 
-const ContactListItem = ({ id, name, number, onRemove }) => {
-  return (
-    <li>
-      {name}: {number} <button onClick={() => onRemove(id)}>Delete</button>
-    </li>
-  );
-};
+const ContactList = ({ contacts }) => {
+  const dispatch = useDispatch();
 
-const ContactList = ({ contacts, onRemove }) => {
-  if (contacts.length === 0) return null;
+  const handleRemove = ({ id }) => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <ul>
       {contacts.map(contact => (
         <li key={contact.id}>
-          <ContactListItem {...contact} onRemove={onRemove} />
+          {contact.name} : {contact.number}
+          <button onClick={() => handleRemove(contact.id)}>Delete</button>
         </li>
       ))}
     </ul>
   );
-};
-
-ContactList.prototype = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  number: PropTypes.number,
-  onRemove: PropTypes.func,
 };
 
 export default ContactList;
