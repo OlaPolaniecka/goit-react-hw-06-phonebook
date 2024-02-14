@@ -13,22 +13,23 @@ const contactsSlice = createSlice({
   initialState: contactsInitialState,
   reducers: {
     addContact(state, action) {
-      state.contacts.push({
+      state.push({
         id: nanoid(),
         name: action.payload.name,
         number: action.payload.number,
       });
     },
     deleteContact(state, action) {
-      state.contacts = state.contacts.filter(
-        contact => contact.id !== action.payload
-      );
+      return state.filter(contact => contact.id !== action.payload);
     },
   },
 });
 
 export const selectVisibleContacts = state => {
   const { contacts, filter } = state;
+  if (typeof filter !== 'string') {
+    return contacts;
+  }
   return contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );

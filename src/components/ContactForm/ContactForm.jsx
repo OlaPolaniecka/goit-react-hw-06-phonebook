@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
 
-const ContactForm = ({ onCheckUnique }) => {
+const ContactForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -17,23 +17,14 @@ const ContactForm = ({ onCheckUnique }) => {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-    const isValidForm = validateForm();
-    if (!isValidForm) return;
     dispatch(addContact({ name, number }));
     setName('');
     setNumber('');
   };
 
-  const validateForm = () => {
-    if (!name || !number) {
-      alert('Some field is empty');
-      return false;
-    }
-    return onCheckUnique(name);
-  };
-
   return (
     <form onSubmit={handleFormSubmit}>
+      <p>name</p>
       <input
         type="text"
         name="name"
@@ -43,6 +34,7 @@ const ContactForm = ({ onCheckUnique }) => {
         onChange={handleChangeFormName}
         required
       />
+      <p>number</p>
       <input
         type="tel"
         name="number"
