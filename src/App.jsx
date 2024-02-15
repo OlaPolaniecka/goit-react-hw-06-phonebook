@@ -16,8 +16,8 @@ const App = () => {
     dispatch(addContact({ id, name, number }));
   };
 
-  const handleRemoveContact = ({ id }) => {
-    dispatch(deleteContact({ id }));
+  const handleRemoveContact = contact => {
+    dispatch(deleteContact(contact.id));
   };
   return (
     <div>

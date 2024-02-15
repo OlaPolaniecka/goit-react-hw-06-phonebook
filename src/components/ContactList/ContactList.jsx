@@ -4,8 +4,8 @@ import { deleteContact } from '../../redux/contactsSlice';
 const ContactList = ({ contacts }) => {
   const dispatch = useDispatch();
 
-  const handleRemoveContact = ({ id }) => {
-    dispatch(deleteContact(id));
+  const handleRemoveContact = contact => {
+    dispatch(deleteContact(contact.id));
   };
 
   return (
@@ -13,9 +13,7 @@ const ContactList = ({ contacts }) => {
       {contacts.map(contact => (
         <li key={contact.id}>
           {contact.name} : {contact.number}
-          <button onClick={() => handleRemoveContact(contact.id)}>
-            Delete
-          </button>
+          <button onClick={() => handleRemoveContact(contact)}>Delete</button>
         </li>
       ))}
     </ul>
