@@ -24,7 +24,7 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <p>name</p>
+      <p className="title">Name</p>
       <input
         type="text"
         name="name"
@@ -34,7 +34,7 @@ const ContactForm = () => {
         onChange={handleChangeFormName}
         required
       />
-      <p>number</p>
+      <p className="title">Number</p>
       <input
         type="tel"
         name="number"
@@ -44,7 +44,9 @@ const ContactForm = () => {
         onChange={handleChangeFormNumber}
         required
       />
-      <button type="submit">Add contact</button>
+      <button className="btn" type="submit">
+        Add contact
+      </button>
     </form>
   );
 };

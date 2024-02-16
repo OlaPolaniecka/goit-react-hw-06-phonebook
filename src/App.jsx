@@ -21,9 +21,9 @@ const App = () => {
   };
   return (
     <div>
-      <h1>Phonebook</h1>
+      <h1 className="header">Phonebook</h1>
       <ContactForm onClick={handleAddContact} />
-      <h1>Contacts</h1>
+      <h1 className="header">Contacts</h1>
       <Filter />
       <ContactList contacts={visibleContacts} onClick={handleRemoveContact} />
     </div>

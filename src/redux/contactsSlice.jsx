@@ -27,11 +27,9 @@ const contactsSlice = createSlice({
 
 export const selectVisibleContacts = state => {
   const { contacts, filter } = state;
-  if (typeof filter !== 'string') {
-    return contacts;
-  }
+
   return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
+    contact.name.toLowerCase().includes(filter.filter.toLowerCase())
   );
 };
 
